@@ -1,6 +1,5 @@
-use std::collections::{HashMap, HashSet};
-
 use advent2025::util::read_file;
+use std::collections::{HashMap, HashSet};
 
 fn main() {
     part1();
@@ -23,19 +22,11 @@ fn part2() {
                 if let Some(cnt) = cnt {
                     if i > 0 {
                         let left = worlds.get(&(i - 1));
-                        if left.is_some() {
-                            worlds.insert(i - 1, left.unwrap() + cnt);
-                        } else {
-                            worlds.insert(i - 1, cnt);
-                        }
+                        worlds.insert(i - 1, cnt + left.unwrap_or(&0));
                     }
                     if i < line.len() - 1 {
                         let right = worlds.get(&(i + 1));
-                        if right.is_some() {
-                            worlds.insert(i + 1, right.unwrap() + cnt);
-                        } else {
-                            worlds.insert(i + 1, cnt);
-                        }
+                        worlds.insert(i + 1, cnt + right.unwrap_or(&0));
                     }
                 }
             }
